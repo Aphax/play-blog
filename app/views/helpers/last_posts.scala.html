@@ -1,0 +1,8 @@
+@(lastPost: java.util.List[models.Post])
+
+<h4>Last posts</h4>
+<div class="list-group">
+  @for(p <- lastPost) {
+    <a href="@routes.Post.bySlug(p.slug)" class="list-group-item">@p.name</a>
+  }
+</div>
