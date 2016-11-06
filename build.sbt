@@ -2,7 +2,7 @@ name := "BlogMVC"
 
 version := "1.0"
 
-lazy val `blogmvc` = (project in file(".")).enablePlugins(PlayScala)
+lazy val `blogmvc` = (project in file(".")).enablePlugins(PlayJava)
 
 scalaVersion := "2.11.8"
 

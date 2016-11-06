@@ -1,0 +1,12 @@
+@(currentPage: Integer, maxPage: Integer)
+
+<ul class="pagination">
+  @* First one *@
+  <li><a href="?page=1">&laquo;</a></li>
+
+  @for(i <- 1 to maxPage) {
+    <li><a href="?page=@i">@i</a></li>
+  }
+  @* Last one *@
+  <li><a href="?page=@(maxPage)">&raquo;</a></li>
+</ul>

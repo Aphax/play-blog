@@ -9,6 +9,7 @@ import play.data.validation.Constraints;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,17 +19,29 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "comments")
 public class Comment {
-  @Id @GeneratedValue
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   public Long id;
-  @NotEmpty @NotNull @Constraints.Required
+
+  @NotNull
+  @Constraints.Required
   public String username = "";
-  @Column(name = "mail") @NotEmpty @NotNull @Constraints.Email @Constraints.Required
+
+  @Column(name = "mail")
+  @NotNull
+  @Constraints.Email
+  @Constraints.Required
   public String email = "";
-  @Column(columnDefinition = "MEDIUMTEXT") @NotEmpty @Constraints.Required
+
+  @NotEmpty
+  @Constraints.Required
   public String content = "";
+
   @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
   public DateTime created = DateTime.now();
-  @ManyToOne @JoinColumn(name = "post_id", referencedColumnName = "id")
+
+  @ManyToOne
+  @JoinColumn(name = "post_id", referencedColumnName = "id")
   public Post post;
 
   public String toAgo() {
@@ -67,30 +80,6 @@ public class Comment {
       comment.post = post;
       comment.created = DateTime.now();
       return comment;
-    }
-
-    public String getEmail() {
-      return email;
-    }
-
-    public void setEmail(String email) {
-      this.email = email;
-    }
-
-    public String getUsername() {
-      return username;
-    }
-
-    public void setUsername(String username) {
-      this.username = username;
-    }
-
-    public String getContent() {
-      return content;
-    }
-
-    public void setContent(String content) {
-      this.content = content;
     }
   }
 }
